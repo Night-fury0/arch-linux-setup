@@ -1,0 +1,42 @@
+# Connect to Wifi
+iwctl
+station <station-name> connect <ssid>
+
+# disk partition
+fdisk /dev/<dev-name>
+g - to start new
+n - to create a new partition
+t - to set partition type
+w - to write
+set boot partition type as 'EFI System'
+set other partition types as default 'Linux filesystem'
+
+mkfs.ext4 /dev/<root-partition>
+mkfs.ext4 /dev/<home-partition>
+mkfs.fat -F 32 /dev/<boot-partition>
+mkswap /dev/<swap-partition>
+
+swapon /dev/<swap-partition>
+mount /dev/<root-partition> /mnt
+mkdir /mnt/boot
+mount /dev/<boot-partition> /mnt/boot
+mkdir /mnt/home
+mount /dev/<home-partition> /mnt/home
+
+pacstrap /mnt linux linux-firmware base networkmanager vim grub efibootmgr
+locale-gen # uncomment needed language in /etc/locale-gen and execute
+
+genfstab -U /mnt > /mnt/etc/fstab
+arch-chroot /mnt
+pacman -S linux-headers dosfdtools mtools base-devel wpa-supplicant wireless_tools netctl dialog os-prober intel-ucode amd-ucode
+grub-install --target=x86_64-efi --efi-directory=/boot --removable --recheck
+grub-mkconfig -o /boot/grub/grub.cfg
+
+
+mkinitcpio -P linux
+systemctl enable networkmanager
+set password using passwd
+
+useradd -m -g users -G wheel <user-name>
+passwd <user-name>
+EDITOR=vim visudo # uncomment %wheel ALL = (ALL) ALL 

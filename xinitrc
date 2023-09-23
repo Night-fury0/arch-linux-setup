@@ -50,7 +50,7 @@ fi
 
 while true;
 do
-	xsetroot -name "Load Average $(uptime | awk '{print substr($8,0,length($8)-1)}') | Uptime $(uptime | awk '{print substr($3,0,length($3)-1)}') | CPU $(sensors|grep CPU|awk '{print $2'}) | Battery $(cat /sys/class/power_supply/BAT0/capacity)% | User $(whoami) | $(date)"
+	xsetroot -name "Load Average $(uptime | awk '{print substr($(NF-1),0,length($(NF-1))-1)}') | Uptime $(uptime | awk '{if (NF>10) {print substr($3$4,0,length($3$4)-1)} else {print substr($4,0,length($4)-1)}}') | CPU $(sensors|grep CPU|awk '{print $2'}) | Battery $(cat /sys/class/power_supply/BAT0/capacity)% | User $(whoami) | $(date)"
 	sleep 1
 done &
 

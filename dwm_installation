@@ -1,0 +1,7 @@
+# dwm installation
+
+pacman -S xorg-server xorg-int xorg-randr xorg-xsetroot
+clone, make clean install from official git repos of dwm, dmenu, st
+cp /etc/X11/xinitrc ~/.xinitrc
+remove last 4-5 lines from .xinitrc and replace with 'exec dwm'
+appen 'startx' in ./bash_profile
