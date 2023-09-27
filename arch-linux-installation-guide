@@ -1,8 +1,12 @@
 # Connect to Wifi
 iwctl
-station <station-name> connect <ssid>
+device list				 					# to list devices/stations
+station <station-name> scan					# to scan for networks
+station <station-name> get-networks 		# to list networks available
+station <station-name> connect <ssid>		# to connect to a network
 
 # disk partition
+fdisk -l									# to check list of storage devices
 fdisk /dev/<dev-name>
 g - to start new
 n - to create a new partition
@@ -11,32 +15,51 @@ w - to write
 set boot partition type as 'EFI System'
 set other partition types as default 'Linux filesystem'
 
+# create file systems for the partitions
 mkfs.ext4 /dev/<root-partition>
 mkfs.ext4 /dev/<home-partition>
 mkfs.fat -F 32 /dev/<boot-partition>
 mkswap /dev/<swap-partition>
 
+# mount the partitions
 swapon /dev/<swap-partition>
 mount /dev/<root-partition> /mnt
-mkdir /mnt/boot
-mount /dev/<boot-partition> /mnt/boot
+mkdir /mnt/boot/efi
+mount /dev/<boot-partition> /mnt/boot/efi
 mkdir /mnt/home
 mount /dev/<home-partition> /mnt/home
 
+# create root files using pacstrap and install required packages
 pacstrap /mnt linux linux-firmware base networkmanager vim grub efibootmgr
-locale-gen # uncomment needed language in /etc/locale-gen and execute
 
+# generate fstab file based on the disk partition made
 genfstab -U /mnt > /mnt/etc/fstab
+
 arch-chroot /mnt
-pacman -S linux-headers dosfdtools mtools base-devel wpa-supplicant wireless_tools netctl dialog os-prober intel-ucode amd-ucode
-grub-install --target=x86_64-efi --efi-directory=/boot --removable --recheck
+
+# setup locale-gen
+cd /etc
+# edit locale-gen file to uncomment required language, eg. en_IN and execute locale-gen
+locale-gen
+
+# install additional required packages
+pacman -S linux-headers dosfstools mtools base-devel wpa_supplicant wireless_tools netctl dialog os-prober intel-ucode amd-ucode
+
+# install bootloader (grub)
+grub-install /dev/<storage-device eg. sda> --removable --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
-
+# re-execute linux setup using mkinitcpio or reinstall linux using pacman
 mkinitcpio -P linux
+
+# enable network manager service
 systemctl enable networkmanager
+
+# set login password for root
 set password using passwd
 
+# create a user with sudo priveleges
 useradd -m -g users -G wheel <user-name>
 passwd <user-name>
 EDITOR=vim visudo # uncomment %wheel ALL = (ALL) ALL 
+

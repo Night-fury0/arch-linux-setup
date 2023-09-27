@@ -1,0 +1,19 @@
+pacman -S sbctl
+
+# In BIOS secure boot settings, enter custom mode and delete all keys
+
+sbctl status
+
+sbctl create-keys
+
+sbctl enroll-keys -m
+
+sbctl verify
+
+# sign the kernel and boot loader files
+sbctl sign -s /boot/vmlinuz-linux
+sbctl sign -s /boot/EFI/BOOT/BOOTX64.efi
+
+# reboot system and enable secure boot mode in BIOS Setup
+
+sbctl status

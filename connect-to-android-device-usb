@@ -1,0 +1,9 @@
+# connect to android devices using usb
+
+pacman -S android-file-transfer
+
+# to mount
+aft-mtp-mount <dir-name>
+
+# to unmount
+fusermount -u <dir-name>
