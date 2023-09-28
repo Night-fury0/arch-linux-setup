@@ -1,6 +1,6 @@
 # dwm installation
 
-pacman -S xorg-server xorg-init xorg-randr xorg-xsetroot nitrogen picom redshift 
+pacman -S xorg-server xorg-init xorg-randr xorg-xsetroot nitrogen picom redshift ttf-font-awesome 
 
 clone & execute `make clean install` for the following repos:
 https://git.suckless.org/dwm
