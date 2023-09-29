@@ -8,7 +8,10 @@ https://git.suckless.org/st
 https://git.suckless/org/dmenu
 
 cp /etc/X11/xinitrc ~/.xinitrc
+# remove last 4-5 lines from .xinitrc (involving twm) & include the following command in .xinitrc to refer to commands in display-setup.sh
+echo "source ~/display-setup.sh" >> ~/.xinirc
 
-remove last 4-5 lines from .xinitrc and replace with 'exec dwm' (or refer .xinitrc in repository)
+cp display-setup.sh ~
 
-use 'startx' command to start display server, or include startx command in .bash_profile or .bashrc
+# use 'startx' command to start display server, or include startx command in .bash_profile or .bashrc
+echo "startx" >> ~/.bash_profile
