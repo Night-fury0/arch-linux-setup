@@ -1,0 +1,48 @@
+# to change theme in gtk
+	/usr/share/gtk-2.0/gtkrc
+	/usr/share/gtk-3.0/settings.ini	
+
+# for checking usb connections
+	pacman -S usburils
+	lsusb 				# list of connected devices in usb ports
+
+# connecting/transferring files from android phone connected on usb
+	pacman -S android-file-transfer
+	aft-mtp-mount <dir-name> 	# to mount
+	fusermount -u <dir-name>	# to unmount
+
+# for image viewer (sxiv)
+	git clone https://github.com/xyb3rt/sxiv
+	cd sxiv
+	sudo make clean install
+	echo "Sxiv.background: #000000" >> ~/.Xresources
+	xrdb -load ~/.Xresources
+
+# for doc viewer (pdf/epub/djvu)
+	pacman -S zathura zathura-pdf-mupdf zathura-djvu
+
+# for file manager
+	pacman -S pcmanfm-gtk3
+
+# for audio
+	pacman -S alsa-utils
+	amixer set Master <volume-%-input> 		# to change volume
+	amixer get Master						# to get current volume 
+	alsamixer								# terminal gui volume settings
+	amixer set Master <unmute/mute>			# to mute or unmute audio
+
+# for video
+	pacman -S vlc live-media mpv
+
+# for bluetooth
+	pacman -S bluez bluez-utils
+	bluetoothctl
+
+# for japanese language input
+	# add 3 env variables:
+		export GTK_IM_MODULE = 'ibus'
+		export QT_IM_MODULR = 'ibus'
+		export XMODIFIERS = '@im=bus'
+	pacman -S adobe-source-han-sans-jp ibus ibus-anthy
+	ibus-daemon -dr
+	ibus-setup

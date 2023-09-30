@@ -1,6 +1,8 @@
+# to enable secure boot
+
 pacman -S sbctl
 
-# In BIOS secure boot settings, enter custom mode and delete all keys
+# in BIOS secure boot settings, enter custom mode and delete all keys
 
 sbctl status
 

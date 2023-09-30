@@ -2,10 +2,16 @@
 
 pacman -S xorg-server xorg-init xorg-randr xorg-xsetroot nitrogen picom redshift ttf-font-awesome 
 
-clone & execute `make clean install` for the following repos:
-https://git.suckless.org/dwm
-https://git.suckless.org/st
-https://git.suckless/org/dmenu
+#clone & execute `make clean install` for the following repos:
+git clone https://git.suckless.org/dwm
+git clone https://git.suckless.org/st
+git clone https://git.suckless/org/dmenu
+cd dwm
+sudo make clean install
+cd ../st
+sudo make clean install
+cd ../dmenu
+sudo make clean install
 
 cp /etc/X11/xinitrc ~/.xinitrc
 # remove last 4-5 lines from .xinitrc (involving twm) & include the following command in .xinitrc to refer to commands in display-setup.sh

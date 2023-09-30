@@ -1,8 +1,9 @@
-
+# setting env variables for ibus input
 export GTK_IM_MODULE='ibus'
 export QT_IM_MODULE='ibus'
 export XMODIFIERS='@im=ibus'
 
+# to set contents of status bar
 while true;
 do
 	xsetroot -name " \
@@ -16,7 +17,20 @@ do
  $(date)"
 	sleep 1
 done & 
+
+# to set  desktop wallpaper
 nitrogen --restore &
+
+# to set night light mode
 redshift -P -O 2000 &
-xrandr --output eDP-1 --off --output HDMI-1 --auto &
+
+# to choose the display monitor
+if [ "$(cat /sys/devices/pci0000:00/0000:00:02.0/drm/card1/card1-HDMI-A-1/status)" == "connected" ];
+then
+	xrandr --output HDMI-1 --auto --output eDP-1 --off
+else
+	xrandr --output eDP-1 --auto --output HDMI-1 --off
+fi &
+
+# to execute dwm
 exec dwm

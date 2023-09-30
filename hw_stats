@@ -1,9 +1,11 @@
-CPU temp from Dell SMM: 
+# hardware stats/files for Dell laptop
+
+# CPU temp from Dell SMM: 
 cat /sys/class/hwmon/hwmon5/temp1_input
 
-Ambient temp from Dell SMM:
+# Ambient temp from Dell SMM:
 cat /sys/class/hwmon/hwmon5/temp2_input
 
-GPU temp from Dell SMM:
+# GPU temp from Dell SMM:
 cat /sys/class/hwmon/hwmon5/temp4_input
 
