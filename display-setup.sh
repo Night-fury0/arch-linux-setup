@@ -6,6 +6,10 @@ export XMODIFIERS='@im=ibus'
 # to set contents of status bar
 while true;
 do
+	rec=""
+	if [ "$(ps -A | grep ffmpeg)" != "" ]; then
+		rec=" "
+	fi	
 	xsetroot -name " \
  $(uptime | awk '{print substr($(NF-2),0,length($(NF-1))-1)}') | \
  $(uptime | awk '{if (NF>10) {print substr($3$4,0,length($3$4)-1)} else {print substr($3,0,length($3)-1)}}') | \
@@ -14,7 +18,7 @@ do
  $(cat /sys/class/power_supply/BAT0/capacity)% | \
  $(amixer get Master | grep dB | awk '{ if ($(NF)=="[on]") {print substr($4,2,length($4)-2)} else {print substr($NF,2,length($NF)-2)}  }') | \
  $(whoami) | \
- $(date)"
+ $(date) ${rec}"
 	sleep 1
 done & 
 

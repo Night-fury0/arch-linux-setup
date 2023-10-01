@@ -30,9 +30,12 @@
 	amixer get Master						# to get current volume 
 	alsamixer								# terminal gui volume settings
 	amixer set Master <unmute/mute>			# to mute or unmute audio
+	# to record audio
+	arecord --duration=5 --format=dat test-mic.wav
+	aplay test-mic.wav	
 
 # for video
-	pacman -S vlc live-media mpv
+	pacman -S vlc live-media 
 
 # for bluetooth
 	pacman -S bluez bluez-utils
