@@ -2,6 +2,20 @@
 	/usr/share/gtk-2.0/gtkrc
 	/usr/share/gtk-3.0/settings.ini	
 
+# to change the console font
+	sudo pacman -S terminus-font
+	echo "FONT=ter-120n" >> /etc/vconsole.conf
+	# list of fonts available fonts can be viewed using 'fc-list' command or:
+	ls /use/share/kbd/consolefonts/
+	
+# make vim use system clipboard
+	# if there is '-' sign against 'clipboard' in 'vim --version', then compiling the latest vim code from git can solve the problem
+	sudo pacman -R vim
+	git clone https://github.com/vim/vim.git
+	cd vim/src
+	sudo make clean install
+	echo "set clipboard=unnamedplus" >> ~/.vimrc
+
 # for checking usb connections
 	pacman -S usburils
 	lsusb 				# list of connected devices in usb ports
@@ -42,10 +56,10 @@
 	bluetoothctl
 
 # for japanese language input
-	# add 3 env variables:
-		export GTK_IM_MODULE = 'ibus'
-		export QT_IM_MODULR = 'ibus'
-		export XMODIFIERS = '@im=bus'
+	# add following 3 env variables:
+	export GTK_IM_MODULE = 'ibus'
+	export QT_IM_MODULR = 'ibus'
+	export XMODIFIERS = '@im=bus'
 	pacman -S adobe-source-han-sans-jp ibus ibus-anthy
 	ibus-daemon -dr
 	ibus-setup

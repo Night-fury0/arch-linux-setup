@@ -1,5 +1,5 @@
 
-total_time=3600
+total_time=300
 
 echo "passed here"
 
@@ -13,4 +13,4 @@ done
 
 echo "Time Expired!"
 
-xdg-open ./stop-sign.jpg
+sxiv ./stop-sign.jpg

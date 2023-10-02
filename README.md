@@ -8,6 +8,6 @@
 
 `other-guides` contains commands/instructions for various other setups
 
-`display-setup.sh` contains code to setup status bar and other display settings, to be included in end of file .xinitrc
+`display-setup.sh` contains code to setup status bar and other display settings, to be exeucted on execution of startx command. 
 
 `shell-codes/` contains some commands for different purposes like screenshots, viewing webcam etc.
