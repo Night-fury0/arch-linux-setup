@@ -1,5 +1,9 @@
 
-total_time=300
+if [ -n "$1" ]; then
+	total_time=$1
+else
+	total_time=300
+fi
 
 echo "passed here"
 
@@ -13,4 +17,4 @@ done
 
 echo "Time Expired!"
 
-sxiv ./stop-sign.jpg
+sxiv ~/Pictures/stop-sign.jpg
