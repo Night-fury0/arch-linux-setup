@@ -32,5 +32,14 @@ else
 	xrandr --output eDP-1 --auto --output HDMI-1 --off
 fi &
 
+# if hdmi is disconnected, power on internal display
+while true;
+do
+	if [ "$(cat /sys/devices/pci0000:00/0000:00:02.0/drm/card1/card1-HDMI-A-1/status)" == "disconnected" ]; then
+	xrandr --output eDP-1 --auto
+	fi
+	sleep 20
+done &
+
 # to execute dwm
 exec dwm

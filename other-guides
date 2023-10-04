@@ -15,6 +15,8 @@
 	cd vim/src
 	sudo make clean install
 	echo "set clipboard=unnamedplus" >> ~/.vimrc
+	# xorg stores clipboard as reference, so when vim is closed, the copied content cannot be accessed, to solve this use a clipboard manager eg. parcellite
+	sudo pacman -S parcellite
 
 # for checking usb connections
 	pacman -S usburils
@@ -61,5 +63,5 @@
 	export QT_IM_MODULR = 'ibus'
 	export XMODIFIERS = '@im=bus'
 	pacman -S adobe-source-han-sans-jp ibus ibus-anthy
-	ibus-daemon -dr
+	ibus-daemon -xdr
 	ibus-setup
