@@ -17,6 +17,8 @@
 	echo "set clipboard=unnamedplus" >> ~/.vimrc
 	# xorg stores clipboard as reference, so when vim is closed, the copied content cannot be accessed, to solve this use a clipboard manager eg. parcellite
 	sudo pacman -S parcellite
+	# to set vi as the command line editor
+	echo "set -o vi" >> .bashrc
 
 # for checking usb connections
 	pacman -S usburils
@@ -53,6 +55,25 @@
 # for video
 	pacman -S vlc live-media 
 
+# video editor
+	pacman -S kdenlive breeze
+
+# for screenshot & screenrecording
+	pacman -S ffmpeg
+	mkdir ~/Screenshots
+	mkdir ~/Screencasts
+	sudo cp screenshot.sh /usr/local/bin/screenshot
+	sudo cp screenrecord.sh /usr/local/bin/screenrecord
+	# include key binds in dwm - refer https://github.com/Night-fury0/dwm
+
+# set up python env
+	pacman -S python python-virtualenv
+	mkdir ~/python_project
+	cd ~/python_project
+	virutalenv venv
+	echo "alias pyenv='source ~/python_project/venv/bin/activate'" >> ~/.bashrc
+	# use 'pyenv' to use the python environment and 'deactivate' quit the python environment
+	
 # for bluetooth
 	pacman -S bluez bluez-utils
 	bluetoothctl
