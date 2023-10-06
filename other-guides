@@ -20,6 +20,47 @@
 	# to set vi as the command line editor
 	echo "set -o vi" >> .bashrc
 
+# other way to enable clipboard in vim is to just install gvim
+	sudo pacman -R vim
+	pacman -S gvim
+
+# to compile vim from source file with python3 option enabled
+	git clone https://github.com/vim/vim.git
+	cd vim
+	sudo make distclean
+	./configure --enable-python3interp=yes --with-python3-config-dir=$(python3-config --configdir)
+	sudo make clean install
+	# other options while configuring can be checked at src/auto/configure file.
+	
+# to install ycm in vim
+	pacman -S python-jedi 
+	git clone https://aur.archlinux.org/vim-youcompleteme-git.git
+	cd vim-youcompleteme-git
+	makepkg -si	
+	echo "let g:ycm_server_python_interpreter = '<your-python-executable>'" >> ~/.vimrc
+
+# to enable autocomplete for javascript after installing ycm
+	npm install -g typescript
+	# to enable diagnostics for javascript, include jsconfig.json file
+	echo "{
+	 "compilerOptions": {
+   	     "checkJs": true
+  	  }
+	}" > <project-directory-location>/jsconfig.json
+
+# to enable python3 in vim
+	# clone/pull the official vim repo and cd to the repo and execute following commands
+	sudo make distclean
+	./configure --enable-python3interp=yes --with-python3-config-dir=$(python3-config --configdir)
+
+# to make ycm work for python virtual env, use the file .ycm_extra_conf.py in the project directory
+	echo "
+	def Settings( **kwargs ):
+  return {
+    'interpreter_path': '<python-venv-executable-location>' 
+  }
+ " > <project-direcory>/.ycm_local_config.py	
+
 # for checking usb connections
 	pacman -S usburils
 	lsusb 				# list of connected devices in usb ports
