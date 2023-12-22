@@ -127,3 +127,6 @@
 	pacman -S adobe-source-han-sans-jp ibus ibus-anthy
 	ibus-daemon -xdr
 	ibus-setup
+
+# to sync time based on ntp server
+	timedatectl set-ntp true
